@@ -22,11 +22,12 @@ def book_list(request):
 
 @api_view(['GET','PUT','DELETE'])
 
-def book_detail(request):
+def book_detail(request,id):
     try:
-       book = Book.objects.get(pk=id)
+        book = Book.objects.get(pk=id)
     except Book.DoesNotExist:
         Response(status=status.HTTP_404_NOT_FOUND)
+        
     if request.method == 'GET':
         serializer = BookSerializer(book)
         return Response(serializer.data)
